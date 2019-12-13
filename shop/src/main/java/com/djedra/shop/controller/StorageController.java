@@ -3,7 +3,6 @@ package com.djedra.shop.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.djedra.shop.entity.Storage;
 import com.djedra.shop.facade.StorageFacade;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(value = "/storage")
 @CrossOrigin
+@RequiredArgsConstructor
 public class StorageController {
 
-	@Autowired
-	private StorageFacade storageFacade;
+	private final StorageFacade storageFacade;
 
 	@PostMapping()
 	public Storage add(@RequestBody Storage storage) {
@@ -39,7 +40,7 @@ public class StorageController {
 		return storageFacade.findById(storageId);
 	}
 
-	@GetMapping("/get-by-Name")
+	@GetMapping("/get-by-name")
 	public Optional<Storage> getByName(@RequestParam(value = "name") String name) throws Exception {
 		return storageFacade.findByCategory(name);
 	}

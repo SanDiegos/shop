@@ -47,19 +47,16 @@ public class ArticleControllerTest {
 	private ObjectMapper objectMapper;
 
 	@Autowired
-	ArticleRepository articleRepository;
+	private ArticleRepository articleRepository;
 	@Autowired
-	ArticleCategoryRepository articleCategoryRepository;
+	private ArticleCategoryRepository articleCategoryRepository;
 	@Autowired
-	StorageRepository storageRepository;
+	private StorageRepository storageRepository;
 
 	private Article existingArticle;
 	private ArticleCategory existingArticleCategory;
 	private Storage existingStorage;
 
-//
-//	.andExpect(content().string( containsString("Hello World"))) 
-//
 	@BeforeAll
 	private void init() {
 		existingArticleCategory = articleCategoryRepository

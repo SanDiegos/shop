@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Article {
 
@@ -34,45 +37,5 @@ public class Article {
 //	pole nie uzupełnione. Storage posiada listę artykułów
 	@JsonBackReference
 	private Storage storage;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
-
-	public ArticleCategory getArticleCategory() {
-		return articleCategory;
-	}
-
-	public void setArticleCategory(ArticleCategory articleCategory) {
-		this.articleCategory = articleCategory;
-	}
-
-	public Storage getStorage() {
-		return storage;
-	}
-
-	public void setStorage(Storage storage) {
-		this.storage = storage;
-	}
 
 }

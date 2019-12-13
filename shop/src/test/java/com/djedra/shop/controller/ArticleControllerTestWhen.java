@@ -19,6 +19,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.djedra.shop.components.jsonmergepatch.mapper.ArticleMapper;
+import com.djedra.shop.components.jsonmergepatch.util.PatchHelper;
 import com.djedra.shop.datafactory.ArticleCategoryTestDataFactory;
 import com.djedra.shop.datafactory.ArticleTestDataFactory;
 import com.djedra.shop.datafactory.StorageTestDataFactory;
@@ -36,12 +38,16 @@ public class ArticleControllerTestWhen {
 	private MockMvc mockMvc;
 
 	@MockBean
+	private PatchHelper patchHelper;
+
+	@MockBean
+	private ArticleMapper articleMapper;
+
+	@MockBean
 	private ArticleFacade ArticleFacade;
 
 	@Autowired
 	private ObjectMapper objectMapper;
-
-//	.andExpect(content().string( containsString("Hello World"))) 
 
 	@BeforeAll
 	private void init() {

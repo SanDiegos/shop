@@ -3,7 +3,6 @@ package com.djedra.shop.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.djedra.shop.entity.ArticleCategory;
 import com.djedra.shop.facade.ArticleCategoryFacade;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(value = "/articleCategory")
 @CrossOrigin
+@RequiredArgsConstructor
 public class ArticleCategoryController {
 
-	@Autowired
-	private ArticleCategoryFacade articleCategoryFacade;
+	private final ArticleCategoryFacade articleCategoryFacade;
 
 	@PostMapping()
 	public ArticleCategory add(@RequestBody ArticleCategory articleCategory) {

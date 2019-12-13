@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Storage {
 
@@ -21,29 +24,5 @@ public class Storage {
 
 	@Column
 	private String name;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public List<Article> getArticle() {
-		return article;
-	}
-
-	public void setArticle(List<Article> article) {
-		this.article = article;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 }

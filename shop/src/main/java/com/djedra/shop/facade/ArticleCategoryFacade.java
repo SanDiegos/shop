@@ -3,17 +3,18 @@ package com.djedra.shop.facade;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.djedra.shop.entity.ArticleCategory;
 import com.djedra.shop.reporitory.ArticleCategoryRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class ArticleCategoryFacade {
 
-	@Autowired
-	private ArticleCategoryRepository articleCategoryRepository;
+	private final ArticleCategoryRepository articleCategoryRepository;
 
 	public ArticleCategory save(ArticleCategory articleCategory) {
 		return articleCategoryRepository.save(articleCategory);

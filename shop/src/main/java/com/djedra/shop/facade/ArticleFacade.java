@@ -3,7 +3,6 @@ package com.djedra.shop.facade;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -11,12 +10,13 @@ import org.springframework.stereotype.Component;
 import com.djedra.shop.entity.Article;
 import com.djedra.shop.reporitory.ArticleRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
-//@AllArgsConstructor
+@RequiredArgsConstructor
 public class ArticleFacade {
 
-	@Autowired
-	private ArticleRepository articleRepository;
+	private final ArticleRepository articleRepository;
 
 	public List<Article> findAll() {
 		return articleRepository.findAll();
