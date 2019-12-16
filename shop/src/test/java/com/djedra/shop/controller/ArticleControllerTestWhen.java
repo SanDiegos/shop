@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import com.djedra.shop.components.jsonmergepatch.util.PatchHelper;
 import com.djedra.shop.datafactory.ArticleCategoryTestDataFactory;
 import com.djedra.shop.datafactory.ArticleTestDataFactory;
 import com.djedra.shop.datafactory.StorageTestDataFactory;
+import com.djedra.shop.datafactory.WarrantyTestDataFactory;
 import com.djedra.shop.entity.Article;
 import com.djedra.shop.facade.ArticleFacade;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -51,9 +53,10 @@ public class ArticleControllerTestWhen {
 
 	@BeforeAll
 	private void init() {
-		List<Article> asList = Arrays
-				.asList(ArticleTestDataFactory.getArticle(ArticleCategoryTestDataFactory.getArticleCategory("cat1"),
-						StorageTestDataFactory.getStorage("stor1"), 1.1, "art1"));
+		List<Article> asList = Arrays.asList(ArticleTestDataFactory.getArticle(
+				ArticleCategoryTestDataFactory.getArticleCategory("cat1"), StorageTestDataFactory.getStorage("stor1"),
+				WarrantyTestDataFactory.getStorage("desc", LocalDate.now(), LocalDate.now().plusYears(2)), 1.1,
+				"art1"));
 		when(ArticleFacade.findAll()).thenReturn(asList);
 	}
 

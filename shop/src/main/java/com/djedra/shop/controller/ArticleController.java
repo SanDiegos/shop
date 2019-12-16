@@ -7,7 +7,6 @@ import javax.json.JsonMergePatch;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,7 +73,7 @@ public class ArticleController {
 	}
 
 	@PatchMapping(path = "/{id}", consumes = PatchMediaType.APPLICATION_MERGE_PATCH_VALUE)
-	public ResponseEntity<Void> updateContact(@PathVariable Long id, @RequestBody JsonMergePatch mergePatchDocument)
+	public Article updateContact(@PathVariable Long id, @RequestBody JsonMergePatch mergePatchDocument)
 			throws Exception {
 
 		Article article = articleFacade.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -83,8 +82,8 @@ public class ArticleController {
 				ArticleResourceInput.class);
 
 		articleMapper.update(article, articleResourcePatched);
-		articleFacade.save(article);
+		return articleFacade.save(article);
 
-		return ResponseEntity.noContent().build();
+//		return ResponseEntity.noContent().build();
 	}
 }

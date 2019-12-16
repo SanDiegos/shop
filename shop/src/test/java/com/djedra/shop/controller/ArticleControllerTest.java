@@ -2,10 +2,12 @@ package com.djedra.shop.controller;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -23,12 +25,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.djedra.shop.datafactory.ArticleCategoryTestDataFactory;
 import com.djedra.shop.datafactory.ArticleTestDataFactory;
 import com.djedra.shop.datafactory.StorageTestDataFactory;
+import com.djedra.shop.datafactory.WarrantyTestDataFactory;
 import com.djedra.shop.entity.Article;
 import com.djedra.shop.entity.ArticleCategory;
 import com.djedra.shop.entity.Storage;
+import com.djedra.shop.entity.Warranty;
 import com.djedra.shop.reporitory.ArticleCategoryRepository;
 import com.djedra.shop.reporitory.ArticleRepository;
 import com.djedra.shop.reporitory.StorageRepository;
+import com.djedra.shop.reporitory.WarrantyRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -52,18 +57,22 @@ public class ArticleControllerTest {
 	private ArticleCategoryRepository articleCategoryRepository;
 	@Autowired
 	private StorageRepository storageRepository;
+	@Autowired
+	private WarrantyRepository warrantyRepository;
 
 	private Article existingArticle;
 	private ArticleCategory existingArticleCategory;
 	private Storage existingStorage;
+	private Warranty existingWarranty = WarrantyTestDataFactory.getStorage("desc", LocalDate.now(),
+			LocalDate.now().plusYears(2));
 
 	@BeforeAll
 	private void init() {
 		existingArticleCategory = articleCategoryRepository
 				.save(ArticleCategoryTestDataFactory.getArticleCategory("cat1"));
 		existingStorage = storageRepository.save(StorageTestDataFactory.getStorage("stor1"));
-		existingArticle = articleRepository
-				.save(ArticleTestDataFactory.getArticle(existingArticleCategory, existingStorage, 1.1, "art1"));
+		existingArticle = articleRepository.save(ArticleTestDataFactory.getArticle(existingArticleCategory,
+				existingStorage, existingWarranty, 1.1, "art1"));
 	}
 
 	@Test
@@ -78,6 +87,7 @@ public class ArticleControllerTest {
 		assertAll(() -> {
 			assertEquals(articles.size(), 1);
 			assertEquals(articles.get(0).getArticleCategory(), existingArticleCategory);
+			assertNotNull(articles.get(0).getWarranty());
 		});
 
 	}
