@@ -1,0 +1,7 @@
+security:
+  oauth2:
+    client:
+      clientId: diego
+      clientSecret: haslo
+    resource:
+      token-info-uri: http://localhost:8080/oauth/check_token
